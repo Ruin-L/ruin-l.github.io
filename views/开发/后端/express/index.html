@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Express 框架简介 | 葵花宝典</title>
+    <meta name="description" content="基于vitepress的开发手册">
+    <meta name="generator" content="VitePress v1.6.3">
+    <link rel="preload stylesheet" href="/assets/style.D5X6RXJO.css" as="style">
+    <link rel="preload stylesheet" href="/vp-icons.css" as="style">
+    
+    <script type="module" src="/assets/app.BWQFr0B1.js"></script>
+    <link rel="preload" href="/assets/inter-roman-latin.Di8DUHzh.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="modulepreload" href="/assets/chunks/theme.gSjhJDrb.js">
+    <link rel="modulepreload" href="/assets/chunks/framework.BbnMzUcB.js">
+    <link rel="modulepreload" href="/assets/views_开发_后端_express_index.md.ByPsaKYs.lean.js">
+    <link rel="icon" href="https://jiashu.jsdmirror.com/gh/Ruin-L/image/img/logo_transparent.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script>(function(){const t=()=>{const n=document.documentElement.classList.contains("dark")?"#1b1b1f":"#ffffff",e=document.querySelector('meta[name="theme-color"]')||document.createElement("meta");e.name="theme-color",e.content=n,document.head.appendChild(e)};t(),new MutationObserver(t).observe(document.documentElement,{attributes:!0,attributeFilter:["class"]})})();</script>
+    <style>
+        /* 加密容器样式 */
+        .w-full {
+            width: 100% !important;
+          background: linear-gradient(135deg, var(--vp-c-bg) 0%, var(--vp-c-bg-alt) 100%);
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .w-full::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: 
+            radial-gradient(circle at 20% 50%, rgba(var(--vp-c-brand-rgb), 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(var(--vp-c-brand-rgb), 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 40% 20%, rgba(var(--vp-c-brand-rgb), 0.06) 0%, transparent 50%);
+          pointer-events: none;
+        }
+        
+        /* 加密表单容器 */
+        .w-full > div {
+    
+          background: var(--vp-c-bg);
+   
+          padding: 48px;
+          box-shadow: 
+            0 20px 40px -12px rgba(0, 0, 0, 0.15),
+            0 0 0 1px rgba(var(--vp-c-brand-rgb), 0.1);
+          backdrop-filter: blur(20px);
+          width: 100%;
+          position: relative;
+          z-index: 1;
+        }
+             .w-full:not(:has(input[type="password"])) > div::after {
+          display: none !important;
+        }
+                 .w-full:not(:has(input[type="password"])) > div {
+             padding: 0 !important;
+        }
+       
+        .w-full > div::after {
+        position: absolute;
+        top: 100px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+          content: '此页面需要密码访问🔐';
+          display: block;
+          text-align: center;
+          color: var(--vp-c-text-1);
+          font-size: 32px;
+          font-weight: 600;
+     
+        }
+        
+        /* 密码输入框样式 */
+        .w-full input[type="password"] {
+          width: 100% !important;
+          height: 50px !important;
+          padding: 0 20px !important;
+          border: 2px solid var(--vp-c-divider) !important;
+          border-radius: 12px !important;
+          background: var(--vp-c-bg-alt) !important;
+          color: var(--vp-c-text-1) !important;
+          font-size: 16px !important;
+          line-height: 50px !important;
+          transition: border-color 0.3s ease, box-shadow 0.3s ease !important;
+          box-shadow: 
+            inset 0 2px 4px rgba(0, 0, 0, 0.06),
+            0 2px 8px rgba(0, 0, 0, 0.04) !important;
+          z-index: 10 !important;
+          position: relative !important;
+          pointer-events: auto !important;
+        }
+        
+        .w-full input[type="password"]:focus {
+          outline: none !important;
+          border-color: var(--vp-c-brand) !important;
+          box-shadow: 
+            inset 0 2px 4px rgba(0, 0, 0, 0.06),
+            0 0 0 3px rgba(var(--vp-c-brand-rgb), 0.1),
+            0 4px 12px rgba(var(--vp-c-brand-rgb), 0.15) !important;
+          transform: none !important;
+        }
+        
+        .w-full input[type="password"]::placeholder {
+          color: var(--vp-c-text-2) !important;
+          font-weight: 400;
+        }
+        
+        /* 暗色模式适配 */
+        .dark .w-full {
+          background: linear-gradient(135deg, var(--vp-c-bg) 0%, var(--vp-c-bg-alt) 100%);
+        }
+        
+        .dark .w-full > div {
+          background: var(--vp-c-bg);
+          border-color: var(--vp-c-divider);
+          box-shadow: 
+            0 20px 40px -12px rgba(0, 0, 0, 0.4),
+            0 0 0 1px rgba(var(--vp-c-brand-rgb), 0.2);
+        }
+        
+        .dark .w-full input[type="password"] {
+          background: var(--vp-c-bg-alt) !important;
+          border-color: var(--vp-c-divider) !important;
+          color: var(--vp-c-text-1) !important;
+          box-shadow: 
+            inset 0 2px 4px rgba(0, 0, 0, 0.2),
+            0 2px 8px rgba(0, 0, 0, 0.1) !important;
+          pointer-events: auto !important;
+        }
+        
+        .dark .w-full input[type="password"]:focus {
+          border-color: var(--vp-c-brand) !important;
+          box-shadow: 
+            inset 0 2px 4px rgba(0, 0, 0, 0.2),
+            0 0 0 3px rgba(var(--vp-c-brand-rgb), 0.15),
+            0 4px 12px rgba(var(--vp-c-brand-rgb), 0.2) !important;
+          transform: none !important;
+        }
+        
+        /* 响应式优化 */
+        @media (max-width: 640px) {
+          .w-full > div {
+            padding: 32px 24px;
+            margin: 16px;
+          }
+          
+          .w-full > div::before {
+            font-size: 36px;
+            margin-bottom: 16px;
+          }
+          
+          .w-full > div::after {
+            font-size: 16px;
+            margin: 12px 0 24px 0;
+          }
+          
+          .w-full input[type="password"] {
+            height: 48px !important;
+            line-height: 48px !important;
+            font-size: 15px !important;
+          }
+        }
+        
+        /* 添加微妙的动画效果 */
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .w-full > div {
+          animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* 键盘焦点样式 */
+        .w-full input[type="password"]:not(:placeholder-shown):valid {
+          border-color: rgba(var(--vp-c-success-rgb), 0.6) !important;
+        }
+        
+        .w-full input[type="password"]:not(:placeholder-shown):invalid {
+          border-color: rgba(var(--vp-c-danger-rgb), 0.6) !important;
+        }
+        
+        /* 确保密码输入框始终可点击 */
+        .w-full input[type="password"]:hover,
+        .w-full input[type="password"]:active,
+        .w-full input[type="password"]:visited {
+          pointer-events: auto !important;
+          cursor: text !important;
+          z-index: 10 !important;
+        }
+        
+        /* 移除可能的伪元素干扰 */
+        .w-full input[type="password"]::before,
+        .w-full input[type="password"]::after {
+          display: none !important;
+        }
+        
+        /* 确保输入框容器不会遮挡输入 */
+        .w-full > div {
+          pointer-events: none !important;
+        }
+        
+        .w-full > div input[type="password"] {
+          pointer-events: auto !important;
+        }
+        </style>
+    <script id="check-dark-mode">(()=>{const e=localStorage.getItem("vitepress-theme-appearance")||"auto",a=window.matchMedia("(prefers-color-scheme: dark)").matches;(!e||e==="auto"?a:e==="dark")&&document.documentElement.classList.add("dark")})();</script>
+    <script id="check-mac-os">document.documentElement.classList.toggle("mac",/Mac|iPhone|iPod|iPad/i.test(navigator.platform));</script>
+    <link rel="manifest" href="/manifest.webmanifest">
+    <script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script>
+  </head>
+  <body>
+    <div id="app"><div class="loading-container" data-v-a5bd0d39><!--[--><!--]--><div class="loader-wrapper" data-v-a5bd0d39><div class="loader" data-v-a5bd0d39><div class="spinner" data-v-a5bd0d39></div><div class="pulse" data-v-a5bd0d39></div></div><p class="loading-text" data-v-a5bd0d39>加载中<span class="dots" data-v-a5bd0d39>...</span></p></div></div></div>
+    <script>window.__VP_HASH_MAP__=JSON.parse("{\"index.md\":\"L1OUCMOk\",\"views_关于_index.md\":\"s5MFR8Oh\",\"views_工具_index.md\":\"z48XtQbx\",\"views_工具_补充excel地址信息_index.md\":\"f5t7LDih\",\"views_开发_八股文_cookie、localstorage、session区别_index.md\":\"BQXOeV02\",\"views_开发_八股文_git操作_index.md\":\"DJLnw_IA\",\"views_开发_八股文_index.md\":\"BZQK-hg4\",\"views_开发_八股文_jwt相关_index.md\":\"B3Y2VBB_\",\"views_开发_八股文_mvvm_index.md\":\"DnCjISOr\",\"views_开发_八股文_promise_index.md\":\"U3lMs8l9\",\"views_开发_八股文_proxy与defineproperty区别_index.md\":\"Bs2ITX4Y\",\"views_开发_八股文_this指向_index.md\":\"BZGr60Y8\",\"views_开发_八股文_vue2、3区别_index.md\":\"Ca7Sz4YU\",\"views_开发_八股文_事件传播_index.md\":\"Bxme13hO\",\"views_开发_八股文_事件循环_index.md\":\"CU_WdbYN\",\"views_开发_八股文_作用域_index.md\":\"BaeYvZB-\",\"views_开发_八股文_原型链_index.md\":\"DdlXSoYG\",\"views_开发_八股文_定时器、延时器_index.md\":\"mkF469v_\",\"views_开发_八股文_虚拟dom_index.md\":\"BSIyKuOo\",\"views_开发_八股文_闭包_index.md\":\"BqZQYZT-\",\"views_开发_八股文_防抖、节流_index.md\":\"DEZmeCMH\",\"views_开发_前端_axios_index.md\":\"CFEY4qrG\",\"views_开发_前端_css_index.md\":\"DF9Y2Q1R\",\"views_开发_前端_echarts_index.md\":\"DA8DwxYE\",\"views_开发_前端_echarts滚动条隐藏_index.md\":\"BI7Nfjo5\",\"views_开发_前端_github工作流搭建_index.md\":\"BIiZjx2g\",\"views_开发_前端_html_index.md\":\"C02LqvEf\",\"views_开发_前端_index.md\":\"Cno4AgKJ\",\"views_开发_前端_ios编辑vitepress文档攻略_index.md\":\"ppfjYzm8\",\"views_开发_前端_javascript_index.md\":\"CdV7D3qv\",\"views_开发_前端_nvm_index.md\":\"CO3N70tt\",\"views_开发_前端_pinia_index.md\":\"BfRc-9qK\",\"views_开发_前端_print_index.md\":\"7B7GnGRA\",\"views_开发_前端_pwa应用_index.md\":\"ChfAaWSH\",\"views_开发_前端_typescript_index.md\":\"BECkNc_C\",\"views_开发_前端_uniapp_index.md\":\"CNGAzK9o\",\"views_开发_前端_vite_index.md\":\"CRRU-o6W\",\"views_开发_前端_vitepress 优化代码块样式_index.md\":\"Bt7OPy3O\",\"views_开发_前端_vitepress 图片查看器插件_index.md\":\"1Y6KCrU5\",\"views_开发_前端_vitepress显示git历史记录_index.md\":\"SXb6BuP1\",\"views_开发_前端_vitepress路由动画效果_index.md\":\"BflLBPJc\",\"views_开发_前端_vitepress阅读增强实现_index.md\":\"C2aTBl3a\",\"views_开发_前端_vitepress集成评论系统_index.md\":\"BcJmhVRj\",\"views_开发_前端_vue_index.md\":\"CQ6RoVch\",\"views_开发_前端_使用 c-lodop 进行打印_index.md\":\"oEzL_E3F\",\"views_开发_前端_兼容旧版浏览器_index.md\":\"BnoxC4x6\",\"views_开发_前端_暗黑切换动画_index.md\":\"sMgKTCtw\",\"views_开发_前端_检测版本更新_index.md\":\"DEGn0nYa\",\"views_开发_前端_浏览器硬刷新_index.md\":\"86R39XwL\",\"views_开发_前端_解决vscode同名文件后缀显示copy_index.md\":\"PSDx50ei\",\"views_开发_后端_express_index.md\":\"ByPsaKYs\",\"views_开发_后端_frp内网穿透_index.md\":\"DgUosh67\",\"views_开发_后端_index.md\":\"CF1U7o7K\",\"views_开发_后端_linux下systemctl的使用_index.md\":\"BBZ91w6m\",\"views_开发_后端_mysql_index.md\":\"htp7lO4H\",\"views_开发_后端_nginx_index.md\":\"CTYxXEy4\",\"views_开发_后端_ssh的使用_index.md\":\"CtpiZuYb\",\"views_开发_后端_ssh远程文件修改_index.md\":\"CwY4YIU6\",\"views_开发_后端_vercel的使用_index.md\":\"Cm7oABPc\",\"views_开发_后端_在linux后台部署express服务_index.md\":\"BwbMXCGw\",\"views_生活_index.md\":\"DYG-VB2E\",\"views_生活_健康_胆囊息肉_index.md\":\"9_FU9FgT\",\"views_生活_食谱_index.md\":\"CKsQ7Jzc\",\"views_生活_食谱_煎牛排_index.md\":\"UM-nCcoA\",\"views_生活_食谱_番茄炒蛋_index.md\":\"BuleMd8v\",\"views_生活_食谱_香煎三文鱼_index.md\":\"oKQIjLed\",\"views_硬件_cpu_cpu天梯图_index.md\":\"spJqpqVd\",\"views_硬件_cpu_index.md\":\"DUWQTOTR\",\"views_硬件_index.md\":\"CMDImMfg\",\"views_硬件_soc_index.md\":\"CvByVdN2\",\"views_硬件_soc_soc天梯图_index.md\":\"CO0gkFxG\",\"views_硬件_ssd硬盘_index.md\":\"DYdi3_Pw\",\"views_硬件_内存条_index.md\":\"DKIY_DE2\",\"views_硬件_散热器_index.md\":\"CNwkzgdi\",\"views_硬件_显卡梯图_index.md\":\"CXWFRO1k\",\"views_硬件_显示器_index.md\":\"BkN4CCL3\",\"views_硬件_电源_index.md\":\"tQhSgsxo\",\"views_硬件_装机_index.md\":\"DvMdt81s\",\"views_硬件_键盘_index.md\":\"DQ18f7yJ\",\"views_硬件_鼠标_index.md\":\"DiKkvHmI\",\"views_软件_其他_index.md\":\"BZZyy-k5\",\"views_软件_其他_picgo图床_index.md\":\"DKAXypLH\",\"views_软件_数据库应用_index.md\":\"CwVEGemL\",\"views_软件_数据库应用_mysql的安装_index.md\":\"CTDteuSv\",\"views_软件_数据库应用_navicat_index.md\":\"BOYKvSTz\",\"views_软件_系统操作_anygo开启虚拟定位_index.md\":\"DnSyaqwN\",\"views_软件_系统操作_index.md\":\"0aOO3OO3\",\"views_软件_系统操作_web网页打包为安卓app_index.md\":\"D60TOg5_\",\"views_软件_系统操作_windows下浏览器指定地址全屏_index.md\":\"ClyrE5QO\",\"views_软件_系统操作_windows应用开机自启_index.md\":\"t50x4-s4\",\"views_软件_系统操作_windows打印支持自定义纸张大小_index.md\":\"BzqSFB87\",\"views_软件_系统操作_结束端口占用_index.md\":\"wXq-OBSu\",\"views_软件_系统操作_解决mac软件安装包损坏_index.md\":\"Bazsllzx\",\"views_软件_网络代理_clash_index.md\":\"D1GY0YQq\",\"views_软件_网络代理_devsidecar_index.md\":\"BO2HvaB_\",\"views_软件_网络代理_index.md\":\"acouZmVo\",\"views_软件_网络代理_shadowrocket_index.md\":\"CaW3sgpZ\"}");window.__VP_SITE_DATA__=JSON.parse("{\"lang\":\"zh-CN\",\"dir\":\"ltr\",\"title\":\"葵花宝典\",\"description\":\"基于vitepress的开发手册\",\"base\":\"/\",\"head\":[],\"router\":{\"prefetchLinks\":true},\"appearance\":true,\"themeConfig\":{\"logo\":\"https://jiashu.jsdmirror.com/gh/Ruin-L/image/img/logo_transparent.png\",\"search\":{\"provider\":\"local\",\"options\":{\"translations\":{\"button\":{\"buttonText\":\"搜索文档\",\"buttonAriaLabel\":\"搜索文档\"},\"modal\":{\"noResultsText\":\"无法找到相关结果\",\"resetButtonTitle\":\"清除查询条件\",\"footer\":{\"selectText\":\"选择\",\"navigateText\":\"切换\"}}}}},\"nav\":[{\"text\":\"主页 🏠\",\"link\":\"/\"},{\"text\":\"开发 🧑‍💻\",\"items\":[{\"text\":\"前端\",\"link\":\"/views/开发/前端/\"},{\"text\":\"后端\",\"link\":\"/views/开发/后端/\"},{\"text\":\"八股文\",\"link\":\"/views/开发/八股文/\"}]},{\"text\":\"软件 📲\",\"items\":[{\"text\":\"网络代理\",\"link\":\"/views/软件/网络代理/\"},{\"text\":\"数据库应用\",\"link\":\"/views/软件/数据库应用/\"},{\"text\":\"系统操作\",\"link\":\"/views/软件/系统操作/\"},{\"text\":\"其他\",\"link\":\"/views/软件/其他/\"}]},{\"text\":\"硬件 🖥️\",\"link\":\"/views/硬件/\"},{\"text\":\"工具 🛠️\",\"link\":\"/views/工具/\"},{\"text\":\"生活 🌈\",\"link\":\"/views/生活/\"},{\"text\":\"关于 👦🏻\",\"link\":\"/views/关于/\"}],\"footer\":{\"copyright\":\" Copyright © 2025 葵花宝典\"},\"sidebar\":{\"/views/关于/\":[{\"text\":\"关于\",\"items\":[]}],\"/views/工具/\":[{\"text\":\"工具\",\"items\":[{\"text\":\"补充Excel地址信息\",\"link\":\"/views/工具/补充Excel地址信息/\",\"collapsed\":false,\"items\":[]}]}],\"/views/开发/\":[{\"text\":\"开发\",\"items\":[{\"text\":\"八股文\",\"link\":\"/views/开发/八股文/\",\"collapsed\":false,\"items\":[{\"text\":\"cookie、localstorage、session区别\",\"link\":\"/views/开发/八股文/cookie、localstorage、session区别/\",\"collapsed\":false,\"items\":[]},{\"text\":\"git操作\",\"link\":\"/views/开发/八股文/git操作/\",\"collapsed\":false,\"items\":[]},{\"text\":\"jwt相关\",\"link\":\"/views/开发/八股文/jwt相关/\",\"collapsed\":false,\"items\":[]},{\"text\":\"MVVM\",\"link\":\"/views/开发/八股文/MVVM/\",\"collapsed\":false,\"items\":[]},{\"text\":\"promise\",\"link\":\"/views/开发/八股文/promise/\",\"collapsed\":false,\"items\":[]},{\"text\":\"proxy与defineProperty区别\",\"link\":\"/views/开发/八股文/proxy与defineProperty区别/\",\"collapsed\":false,\"items\":[]},{\"text\":\"this指向\",\"link\":\"/views/开发/八股文/this指向/\",\"collapsed\":false,\"items\":[]},{\"text\":\"vue2、3区别\",\"link\":\"/views/开发/八股文/vue2、3区别/\",\"collapsed\":false,\"items\":[]},{\"text\":\"事件传播\",\"link\":\"/views/开发/八股文/事件传播/\",\"collapsed\":false,\"items\":[]},{\"text\":\"事件循环\",\"link\":\"/views/开发/八股文/事件循环/\",\"collapsed\":false,\"items\":[]},{\"text\":\"作用域\",\"link\":\"/views/开发/八股文/作用域/\",\"collapsed\":false,\"items\":[]},{\"text\":\"原型链\",\"link\":\"/views/开发/八股文/原型链/\",\"collapsed\":false,\"items\":[]},{\"text\":\"定时器、延时器\",\"link\":\"/views/开发/八股文/定时器、延时器/\",\"collapsed\":false,\"items\":[]},{\"text\":\"虚拟dom\",\"link\":\"/views/开发/八股文/虚拟dom/\",\"collapsed\":false,\"items\":[]},{\"text\":\"闭包\",\"link\":\"/views/开发/八股文/闭包/\",\"collapsed\":false,\"items\":[]},{\"text\":\"防抖、节流\",\"link\":\"/views/开发/八股文/防抖、节流/\",\"collapsed\":false,\"items\":[]}]},{\"text\":\"前端\",\"link\":\"/views/开发/前端/\",\"collapsed\":false,\"items\":[{\"text\":\"axios\",\"link\":\"/views/开发/前端/axios/\",\"collapsed\":false,\"items\":[]},{\"text\":\"css\",\"link\":\"/views/开发/前端/css/\",\"collapsed\":false,\"items\":[]},{\"text\":\"echarts\",\"link\":\"/views/开发/前端/echarts/\",\"collapsed\":false,\"items\":[]},{\"text\":\"echarts滚动条隐藏\",\"link\":\"/views/开发/前端/echarts滚动条隐藏/\",\"collapsed\":false,\"items\":[]},{\"text\":\"github工作流搭建\",\"link\":\"/views/开发/前端/github工作流搭建/\",\"collapsed\":false,\"items\":[]},{\"text\":\"html\",\"link\":\"/views/开发/前端/html/\",\"collapsed\":false,\"items\":[]},{\"text\":\"ios编辑vitepress文档攻略\",\"link\":\"/views/开发/前端/ios编辑vitepress文档攻略/\",\"collapsed\":false,\"items\":[]},{\"text\":\"javaScript\",\"link\":\"/views/开发/前端/javaScript/\",\"collapsed\":false,\"items\":[]},{\"text\":\"nvm\",\"link\":\"/views/开发/前端/nvm/\",\"collapsed\":false,\"items\":[]},{\"text\":\"pinia\",\"link\":\"/views/开发/前端/pinia/\",\"collapsed\":false,\"items\":[]},{\"text\":\"print\",\"link\":\"/views/开发/前端/print/\",\"collapsed\":false,\"items\":[]},{\"text\":\"pwa应用\",\"link\":\"/views/开发/前端/pwa应用/\",\"collapsed\":false,\"items\":[]},{\"text\":\"typeScript\",\"link\":\"/views/开发/前端/typeScript/\",\"collapsed\":false,\"items\":[]},{\"text\":\"uniapp\",\"link\":\"/views/开发/前端/uniapp/\",\"collapsed\":false,\"items\":[]},{\"text\":\"vite\",\"link\":\"/views/开发/前端/vite/\",\"collapsed\":false,\"items\":[]},{\"text\":\"VitePress 优化代码块样式\",\"link\":\"/views/开发/前端/VitePress 优化代码块样式/\",\"collapsed\":false,\"items\":[]},{\"text\":\"VitePress 图片查看器插件\",\"link\":\"/views/开发/前端/VitePress 图片查看器插件/\",\"collapsed\":false,\"items\":[]},{\"text\":\"vitepress显示git历史记录\",\"link\":\"/views/开发/前端/vitepress显示git历史记录/\",\"collapsed\":false,\"items\":[]},{\"text\":\"vitepress路由动画效果\",\"link\":\"/views/开发/前端/vitepress路由动画效果/\",\"collapsed\":false,\"items\":[]},{\"text\":\"vitepress阅读增强实现\",\"link\":\"/views/开发/前端/vitepress阅读增强实现/\",\"collapsed\":false,\"items\":[]},{\"text\":\"VitePress集成评论系统\",\"link\":\"/views/开发/前端/VitePress集成评论系统/\",\"collapsed\":false,\"items\":[]},{\"text\":\"vue\",\"link\":\"/views/开发/前端/vue/\",\"collapsed\":false,\"items\":[]},{\"text\":\"使用 C-lodop 进行打印\",\"link\":\"/views/开发/前端/使用 C-lodop 进行打印/\",\"collapsed\":false,\"items\":[]},{\"text\":\"兼容旧版浏览器\",\"link\":\"/views/开发/前端/兼容旧版浏览器/\",\"collapsed\":false,\"items\":[]},{\"text\":\"加密内容\",\"link\":\"/views/开发/前端/加密内容/\",\"collapsed\":false,\"items\":[]},{\"text\":\"暗黑切换动画\",\"link\":\"/views/开发/前端/暗黑切换动画/\",\"collapsed\":false,\"items\":[]},{\"text\":\"检测版本更新\",\"link\":\"/views/开发/前端/检测版本更新/\",\"collapsed\":false,\"items\":[]},{\"text\":\"浏览器硬刷新\",\"link\":\"/views/开发/前端/浏览器硬刷新/\",\"collapsed\":false,\"items\":[]},{\"text\":\"解决vscode同名文件后缀显示copy\",\"link\":\"/views/开发/前端/解决vscode同名文件后缀显示copy/\",\"collapsed\":false,\"items\":[]}]},{\"text\":\"后端\",\"link\":\"/views/开发/后端/\",\"collapsed\":false,\"items\":[{\"text\":\"express\",\"link\":\"/views/开发/后端/express/\",\"collapsed\":false,\"items\":[]},{\"text\":\"FRP内网穿透\",\"link\":\"/views/开发/后端/FRP内网穿透/\",\"collapsed\":false,\"items\":[]},{\"text\":\"linux下systemctl的使用\",\"link\":\"/views/开发/后端/linux下systemctl的使用/\",\"collapsed\":false,\"items\":[]},{\"text\":\"mysql\",\"link\":\"/views/开发/后端/mysql/\",\"collapsed\":false,\"items\":[]},{\"text\":\"nginx\",\"link\":\"/views/开发/后端/nginx/\",\"collapsed\":false,\"items\":[]},{\"text\":\"ssh的使用\",\"link\":\"/views/开发/后端/ssh的使用/\",\"collapsed\":false,\"items\":[]},{\"text\":\"ssh远程文件修改\",\"link\":\"/views/开发/后端/ssh远程文件修改/\",\"collapsed\":false,\"items\":[]},{\"text\":\"vercel的使用\",\"link\":\"/views/开发/后端/vercel的使用/\",\"collapsed\":false,\"items\":[]},{\"text\":\"在linux后台部署express服务\",\"link\":\"/views/开发/后端/在linux后台部署express服务/\",\"collapsed\":false,\"items\":[]}]}]}],\"/views/生活/\":[{\"text\":\"生活\",\"items\":[{\"text\":\"健康\",\"link\":\"/views/生活/健康/\",\"collapsed\":false,\"items\":[{\"text\":\"胆囊息肉\",\"link\":\"/views/生活/健康/胆囊息肉/\",\"collapsed\":false,\"items\":[]}]},{\"text\":\"食谱\",\"link\":\"/views/生活/食谱/\",\"collapsed\":false,\"items\":[{\"text\":\"煎牛排\",\"link\":\"/views/生活/食谱/煎牛排/\",\"collapsed\":false,\"items\":[]},{\"text\":\"番茄炒蛋\",\"link\":\"/views/生活/食谱/番茄炒蛋/\",\"collapsed\":false,\"items\":[]},{\"text\":\"香煎三文鱼\",\"link\":\"/views/生活/食谱/香煎三文鱼/\",\"collapsed\":false,\"items\":[]}]}]}],\"/views/硬件/\":[{\"text\":\"硬件\",\"items\":[{\"text\":\"CPU\",\"link\":\"/views/硬件/CPU/\",\"collapsed\":false,\"items\":[{\"text\":\"CPU天梯图\",\"link\":\"/views/硬件/CPU/CPU天梯图/\",\"collapsed\":false,\"items\":[]}]},{\"text\":\"SOC\",\"link\":\"/views/硬件/SOC/\",\"collapsed\":false,\"items\":[{\"text\":\"SOC天梯图\",\"link\":\"/views/硬件/SOC/SOC天梯图/\",\"collapsed\":false,\"items\":[]}]},{\"text\":\"SSD硬盘\",\"link\":\"/views/硬件/SSD硬盘/\",\"collapsed\":false,\"items\":[]},{\"text\":\"内存条\",\"link\":\"/views/硬件/内存条/\",\"collapsed\":false,\"items\":[]},{\"text\":\"散热器\",\"link\":\"/views/硬件/散热器/\",\"collapsed\":false,\"items\":[]},{\"text\":\"显卡梯图\",\"link\":\"/views/硬件/显卡梯图/\",\"collapsed\":false,\"items\":[]},{\"text\":\"显示器\",\"link\":\"/views/硬件/显示器/\",\"collapsed\":false,\"items\":[]},{\"text\":\"电源\",\"link\":\"/views/硬件/电源/\",\"collapsed\":false,\"items\":[]},{\"text\":\"装机\",\"link\":\"/views/硬件/装机/\",\"collapsed\":false,\"items\":[]},{\"text\":\"键盘\",\"link\":\"/views/硬件/键盘/\",\"collapsed\":false,\"items\":[]},{\"text\":\"鼠标\",\"link\":\"/views/硬件/鼠标/\",\"collapsed\":false,\"items\":[]}]}],\"/views/软件/\":[{\"text\":\"软件\",\"items\":[{\"text\":\"其他\",\"link\":\"/views/软件/其他/\",\"collapsed\":false,\"items\":[{\"text\":\"picgo图床\",\"link\":\"/views/软件/其他/picgo图床/\",\"collapsed\":false,\"items\":[]}]},{\"text\":\"数据库应用\",\"link\":\"/views/软件/数据库应用/\",\"collapsed\":false,\"items\":[{\"text\":\"mysql的安装\",\"link\":\"/views/软件/数据库应用/mysql的安装/\",\"collapsed\":false,\"items\":[]},{\"text\":\"navicat\",\"link\":\"/views/软件/数据库应用/navicat/\",\"collapsed\":false,\"items\":[]}]},{\"text\":\"系统操作\",\"link\":\"/views/软件/系统操作/\",\"collapsed\":false,\"items\":[{\"text\":\"anygo开启虚拟定位\",\"link\":\"/views/软件/系统操作/anygo开启虚拟定位/\",\"collapsed\":false,\"items\":[]},{\"text\":\"web网页打包为安卓app\",\"link\":\"/views/软件/系统操作/web网页打包为安卓app/\",\"collapsed\":false,\"items\":[]},{\"text\":\"windows下浏览器指定地址全屏\",\"link\":\"/views/软件/系统操作/windows下浏览器指定地址全屏/\",\"collapsed\":false,\"items\":[]},{\"text\":\"windows应用开机自启\",\"link\":\"/views/软件/系统操作/windows应用开机自启/\",\"collapsed\":false,\"items\":[]},{\"text\":\"windows打印支持自定义纸张大小\",\"link\":\"/views/软件/系统操作/windows打印支持自定义纸张大小/\",\"collapsed\":false,\"items\":[]},{\"text\":\"结束端口占用\",\"link\":\"/views/软件/系统操作/结束端口占用/\",\"collapsed\":false,\"items\":[]},{\"text\":\"解决mac软件安装包损坏\",\"link\":\"/views/软件/系统操作/解决mac软件安装包损坏/\",\"collapsed\":false,\"items\":[]}]},{\"text\":\"网络代理\",\"link\":\"/views/软件/网络代理/\",\"collapsed\":false,\"items\":[{\"text\":\"clash\",\"link\":\"/views/软件/网络代理/clash/\",\"collapsed\":false,\"items\":[]},{\"text\":\"devSidecar\",\"link\":\"/views/软件/网络代理/devSidecar/\",\"collapsed\":false,\"items\":[]},{\"text\":\"shadowrocket\",\"link\":\"/views/软件/网络代理/shadowrocket/\",\"collapsed\":false,\"items\":[]}]}]}]},\"notFound\":{\"title\":\"页面未找到\",\"quote\":\"但如果你不改变方向，继续寻找，你可能会到达你想去的地方。\",\"linkLabel\":\"返回首页\",\"linkText\":\"返回主页\"},\"editLink\":{\"pattern\":\"https://github.com/Ruin-L/program-doc-source/blob/main/src/:path\",\"text\":\"在github上编辑此页\"},\"outlineTitle\":\"本页目录\",\"lastUpdatedText\":\"最后更新\",\"darkModeSwitchLabel\":\"外观\",\"sidebarMenuLabel\":\"菜单\",\"returnToTopLabel\":\"返回顶部\",\"docFooter\":{\"prev\":\"上一篇\",\"next\":\"下一篇\"},\"socialLinks\":[{\"icon\":\"github\",\"link\":\"https://github.com/Ruin-L?tab=repositories\"}]},\"locales\":{\"/\":{\"lang\":\"zh-CN\",\"label\":\"简体中文\",\"title\":\"葵花宝典\",\"description\":\"基于vitepress的开发手册\"}},\"scrollOffset\":134,\"cleanUrls\":true}");</script>
+    
+  </body>
+</html>
